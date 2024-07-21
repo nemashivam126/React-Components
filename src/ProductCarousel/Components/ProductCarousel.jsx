@@ -17,19 +17,30 @@ export default function ProductCarousel(){
     //     })
     // }
 
+    // function GetProduct() {
+    //     axios.get("http://fakestoreapi.com/products", {
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json',
+    //         }
+    //     })
+    //     .then(response => {
+    //         setProduct(response.data);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching data:', error);
+    //     });
+    // }
+
     function GetProduct() {
-        axios.get("http://fakestoreapi.com/products", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+        axios.get("/data.json")
+            .then(response => {
+                setProduct(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
             }
-        })
-        .then(response => {
-            setProduct(response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+        );
     }
     
     function HandleRangeChange(e){
@@ -73,7 +84,7 @@ export default function ProductCarousel(){
                 {
                     products.map((product, index) =>
                         <div key={product.id} className="slide" style={{ opacity: index === currentSlide ? '1' : '0' }}>
-                            <img src={product.image} alt="Images" height={'400px'} width={'500px'} style={{padding:'50px', marginLeft:'140px'}}/>
+                            <img src={product.post_url} alt="Images" height={'400px'} width={'500px'} style={{padding:'50px', marginLeft:'140px'}}/>
                         </div>
                     )
                 }
