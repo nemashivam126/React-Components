@@ -10,11 +10,25 @@ export default function ProductCarousel(){
     const[btnTxt, setBtnTxt]= useState('Pause');
     const[btnIcon, setBtnIcon]= useState(<span className="bi bi-pause"></span>)
     
-    function GetProduct(){
-        axios.get("http://fakestoreapi.com/products")
-        .then(response=>{
-            setProduct(response.data)
+    // function GetProduct(){
+    //     axios.get("http://fakestoreapi.com/products")
+    //     .then(response=>{
+    //         setProduct(response.data)
+    //     })
+    // }
+
+    function GetProduct() {
+        axios.get("http://fakestoreapi.com/products", {
+            headers: {
+                'Accept': 'application/json'
+            }
         })
+        .then(response => {
+            setProduct(response.data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
     }
     
     function HandleRangeChange(e){
