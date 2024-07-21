@@ -20,7 +20,8 @@ export default function ProductCarousel(){
     function GetProduct() {
         axios.get("http://fakestoreapi.com/products", {
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             }
         })
         .then(response => {
