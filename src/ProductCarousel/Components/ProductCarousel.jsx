@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react"
-import axios from "axios";
+// import axios from "axios";
 import '../Styles/ProductCarousel.css';
+import products from '../../../data.json';
 
 export default function ProductCarousel(){
-    const[products, setProduct] = useState([]);
+    // const[products, setProduct] = useState([]);
     const [currentSlide, setCurrentSlide] = useState(0);
     const[isRunning, setIsRunning]= useState(true);
     const[btnTxt, setBtnTxt]= useState('Pause');
@@ -16,39 +17,13 @@ export default function ProductCarousel(){
     //         setProduct(response.data)
     //     })
     // }
-
-    // function GetProduct() {
-    //     axios.get("http://fakestoreapi.com/products", {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json',
-    //         }
-    //     })
-    //     .then(response => {
-    //         setProduct(response.data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //     });
-    // }
-
-    function GetProduct() {
-        axios.get("/data.json")
-            .then(response => {
-                setProduct(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            }
-        );
-    }
     
     function HandleRangeChange(e){
         setCurrentSlide(parseInt(e.target.value));
     }
 
     useEffect(() => {
-        GetProduct();
+        // GetProduct();
         if(isRunning){
             const interval = setInterval(() => {
                 setCurrentSlide((prevSlide)=> (prevSlide===products.length-1)?0:prevSlide+1);
@@ -57,7 +32,7 @@ export default function ProductCarousel(){
                 clearInterval(interval);
             };
         }
-    }, [isRunning,products.length]);
+    }, [isRunning]);
       
     function handleClickPrev(){
         setCurrentSlide((prevSlide)=>(prevSlide===0?products.length-1:prevSlide-1));
@@ -84,7 +59,7 @@ export default function ProductCarousel(){
                 {
                     products.map((product, index) =>
                         <div key={product.id} className="slide" style={{ opacity: index === currentSlide ? '1' : '0' }}>
-                            <img src={product.post_url} alt="Images" height={'400px'} width={'500px'} style={{padding:'50px', marginLeft:'140px'}}/>
+                            <img src={product.image} alt="Images" height={'400px'} width={'500px'} style={{padding:'50px', marginLeft:'140px'}}/>
                         </div>
                     )
                 }
