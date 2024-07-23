@@ -7,3 +7,7 @@
     /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
     box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
+
+.container-fluid {
+    width: fit-content !important;
+}
